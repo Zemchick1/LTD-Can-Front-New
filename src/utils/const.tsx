@@ -1,0 +1,3 @@
+export const PAGINATION_WRITINGS_QUANTITY = 20;
+export const WRITINGS_ON_PAGE = 5;
+export const WRITINGS_ON_SEARCHPAGE = 1;

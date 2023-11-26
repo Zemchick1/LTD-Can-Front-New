@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+          - name: Checkout code
+            uses: actions/checkout@v2
+            with:
+              fetch-depth: 0
+              clean: false
+            
+          - name: Cache dependencies
+            uses: actions/cache@v2
+            with:
+                path: node_modules
+                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                  ${{ runner.os }}-node-
+                  
+          - name: Set up Node.js
+            uses: actions/setup-node@v2
+            with:
+               node-version: 14
+
+          - name: Install dependencies
+            run: npm install
+
+          - name: Build
+            run: npm run build
+
+          - name: Archive build
+            uses: actions/upload-artifact@v2
+            with:
+              name: Build Artifact
+              path: ./build
+
+  test:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+            
+        - name: Set up Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: 14
+
+        - name: Install dependencies
+          run: npm install
+      
+        - name: Run tests
+          run: npm run test
+
+  docker:
+     needs: build
+     runs-on: ubuntu-latest
+
+     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: Build Artifact
+          path: ./build
+
+      - name: Build Docker image
+        run: docker build -t ${{secrets.DOCKER_REPOSITORY}}:frontend .
+
+      - name: login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: push Docker image to registry
+        run: docker push ${{secrets.DOCKER_REPOSITORY}}:frontend
+          
+  # sonarQube:
+  #    needs: docker
+  #    runs-on: ubuntu-latest
+     
+  #    steps:      
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
+  #     - name: SonarQube Scan
+  #       uses: sonarsource/sonarqube-scan-action@master
+  #       env:
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

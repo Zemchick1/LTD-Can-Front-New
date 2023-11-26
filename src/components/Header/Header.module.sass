@@ -1,0 +1,68 @@
+@import "../../utils/mixins"
+@import "../../utils/variables"
+
+.headerWrapper
+    padding: 0px 140px
+    background-color: #79b65f
+    position: sticky
+    top: 0
+    z-index: 5
+    margin-bottom: 30px
+
+.header
+    background-color: #79b65f
+    width: 100%
+    padding: 20px 0px
+    display: flex
+    flex-direction: row
+    align-items: center
+    min-width: 1024px
+    justify-content: space-between
+    box-sizing: border-box
+    position: relative
+    z-index: 5
+
+.logInBtn
+    @include btn
+    background-color: $mainColor
+    color: $secondaryColor
+    margin-right: 16px
+    &:hover
+        @include hoverInvert
+
+.searchBar
+    border-radius: 50px
+    outline: none
+    border: none
+    position: absolute
+    width: 553px
+    height: 48px
+    left: 827px
+    top: 11px
+
+.categoryDropdown
+    cursor: pointer
+    position: relative
+    &::first-letter
+        text-transform: capitalize
+
+.categoryDropdownLink
+    @include linkNoUnderline
+
+.headerDropdown
+    @include unorderedList
+    position: absolute
+    background-color: white
+    padding: 20px
+    text-align: left
+    z-index: 2
+
+.authBtn
+    cursor: pointer
+
+.langBtn
+    cursor: pointer
+
+@media screen and (max-width: 400px)
+    header
+        min-width: 200px

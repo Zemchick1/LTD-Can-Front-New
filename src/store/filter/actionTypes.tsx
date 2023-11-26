@@ -1,0 +1,4 @@
+export enum ActionType {
+    SET_FILTER = "FILTER::CHOOSE_FILTER",
+    SET_YEAR_RANGE = "FILTER::SET_YEAR_RANGE"
+}

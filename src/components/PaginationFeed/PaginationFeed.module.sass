@@ -1,0 +1,36 @@
+@import "../../utils/mixins"
+
+.pagination
+    display: flex
+    flex-direction: column
+    width: 100%
+    z-index: 0
+    overflow: hidden
+
+.paginationButtons
+    display: flex
+    justify-content: space-between
+
+.page
+    display: flex
+    justify-content: space-between
+    width: 100%
+    z-index: -1
+
+.feed
+    display: flex
+    position: relative
+    background-color: rgb(100, 100, 100)
+    z-index: -2
+
+.pageBtn
+    @include btn
+
+.pageBtns
+    display: flex
+
+.feedBtns
+    display: flex
+
+.feedBtn
+    @include btn

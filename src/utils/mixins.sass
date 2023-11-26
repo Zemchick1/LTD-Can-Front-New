@@ -1,0 +1,31 @@
+@import "./variables"
+
+@mixin btn
+    font-size: 16px
+    font-weight: 500
+    border: none
+    border-radius: 500px
+    outline: none
+    padding: 12px 16px
+    display: flex
+    flex-direction: row
+    color: $mainColor
+    background-color: $secondaryColor
+    cursor: pointer
+    box-sizing: border-box
+    align-items: center
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px, rgba(0, 0, 0, 0.04) 0px 4px 4px
+    font-family: 'Uber Move Text', sans-serif
+
+@mixin linkNoUnderline
+    text-decoration: none
+    color: $secondaryColor
+
+@mixin hoverInvert
+    filter: invert(0.2)
+
+@mixin container
+    padding: 0px 40px
+
+@mixin unorderedList
+    list-style: none

@@ -1,0 +1,52 @@
+@import "../../utils/mixins"
+@import "../../utils/variables"
+
+.form
+    display: flex
+    flex-direction: column
+    min-width: 500px
+
+.loginInput
+    margin-bottom: 18px
+    border: 2px solid $lightGray
+    padding: 14px
+    &:focus
+        border: 2px solid $lightGray
+    &:last-of-type
+        margin: unset
+
+.loginLabel
+    color: black
+    margin-bottom: 8px
+    margin-right: auto
+    font-size: 18px
+    font-weight: 550
+
+.loginText
+    font-size: 16px
+    margin: 4px auto 0 0
+    color: black
+
+.loginLink
+    color: black
+    font-weight: 550
+    margin-left: 4px
+
+.loginBtn
+    @include btn
+    margin-top: 18px
+    height: 46px
+    color: white
+    background-color: #1d2939
+    border-radius: 10px
+    border: none
+    font-size: 18px
+    cursor: pointer
+    &:hover
+        @include hoverInvert
+
+.valid
+    color: green
+
+.invalid
+    color: red
